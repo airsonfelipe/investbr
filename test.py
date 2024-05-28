@@ -1,43 +1,62 @@
 import yfinance as yf
-from datetime import datetime
-import time
 
 
-def alta_dia_fii():
-    with open("tickers_fii.txt", "r") as file:
-        brazilian_tickers_fii = [ticker.strip() for ticker in file.readlines()]
+# NOTICIAS IBOV
 
-    highest_gain_fii = None  # Variável para armazenar a maior alta do dia
-    highest_gain_ticker_fii = None  # Variável para armazenar o ticker com a maior alta do dia
 
-    # Define o horário de abertura do mercado (por exemplo, 10:00 da manhã)
-    market_open_time = datetime.now().replace(hour=10, minute=0, second=0, microsecond=0)
+def noticias_ibov():
+    # Ticker do índice Ibovespa
+    ibov_ticker = "^BVSP"
 
-    for ticker in brazilian_tickers_fii:
-        try:
-            # Baixa os dados da ação
-            stock_data = yf.download(ticker, start=market_open_time)
-            open_price_fii = stock_data["Open"].iloc[0]
-            close_price_fii = stock_data["Close"].iloc[-1]
-            daily_gain_fii = (close_price_fii - open_price_fii) / open_price_fii * 100
+    # Obter o objeto Ticker do yfinance
+    yf_ticker = yf.Ticker(ibov_ticker)
 
-            # SE QUISER IMPRIMIR TODOS OS TICKERS
-            print(ticker, open_price_fii, close_price_fii)
+    # Obter notícias relacionadas ao índice Ibovespa
+    news = yf_ticker.news
 
-            if open_price_fii == 0 or close_price_fii == 0:
-                print(f"Preço de abertura ou de fechamento igual a zero para o ticker {ticker}. Pulando...")
-                continue
-        except Exception as e:
-            print(f"Erro ao baixar dados para o ticker {ticker}: {e}")
-            continue  # Pula para o próximo ticker
+    return news
 
-        if highest_gain_fii is None or daily_gain_fii > highest_gain_fii:
-            highest_gain_fii = daily_gain_fii
-            highest_gain_ticker_fii = ticker
+# Buscar notícias sobre a bolsa brasileira
 
-    print(close_price_fii, highest_gain_ticker_fii, highest_gain_fii)
-    return close_price_fii, highest_gain_ticker_fii, highest_gain_fii
-alta_dia_fii()
+
+news_data = noticias_ibov()
+
+news1 = f"- {news_data[0]['title']}: {news_data[0]['link']}"
+news2 = f"- {news_data[1]['title']}: {news_data[1]['link']}"
+news3 = f"- {news_data[2]['title']}: {news_data[2]['link']}"
+news4 = f"- {news_data[3]['title']}: {news_data[3]['link']}"
+
+print(news1)
+print(news2)
+print(news3)
+print(news4)
 
 
 
+
+# NOTICIAS ACOES EM GERAL
+def noticias_acoes_bb():
+    # Ticker do índice Ibovespa
+    ticker = 'BANCO DO BRASIL'
+
+    # Obter o objeto Ticker do yfinance
+    yf_ticker = yf.Ticker(ticker)
+
+    # Obter notícias relacionadas ao índice Ibovespa
+    news = yf_ticker.news
+    return news
+
+# Buscar notícias sobre a bolsa brasileira
+
+
+news_data = noticias_acoes_bb()
+
+news1_bb = f"- {news_data[0]['title']}: {news_data[0]['link']}"
+news2_bb = f"- {news_data[1]['title']}: {news_data[1]['link']}"
+news3_bb = f"- {news_data[2]['title']}: {news_data[2]['link']}"
+news4_bb = f"- {news_data[3]['title']}: {news_data[3]['link']}"
+print(' ')
+print(news1_bb)
+print(news2_bb)
+print(news3_bb)
+print(news4_bb)

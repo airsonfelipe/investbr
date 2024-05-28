@@ -47,6 +47,8 @@ def alta_dia():
 
     print(close_price, highest_gain_ticker, highest_gain)
     return close_price, highest_gain_ticker, highest_gain
+
+
 alta_dia()
 
 
@@ -85,6 +87,8 @@ def alta_dia_fii():
 
     print(close_price_fii, highest_gain_ticker_fii, highest_gain_fii)
     return close_price_fii, highest_gain_ticker_fii, highest_gain_fii
+
+
 alta_dia_fii()
 
 
