@@ -1,9 +1,10 @@
 import yfinance as yf
 
-def noticias_acoes_vale():
-    ticker = 'PETROBRAS'
-    yf_ticker = yf.Ticker(ticker)
-    news = yf_ticker.news
-    print(news)
+def dolar_price():
+    dolar_ticker = 'USDBRL=X'
+    dolar_data = yf.download(dolar_ticker, period="1d")
+    dolar_price = '{:,.2f}'.format(dolar_data["Close"].iloc[-1])
+    print(dolar_price)
+    return dolar_price
 
-noticias_acoes_vale()
+dolar_price()
