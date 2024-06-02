@@ -6,34 +6,31 @@
 </head>
 <body>
 
-    <h1>This is my first Site coded in Python</h1>
-    <br>
-    <br>
-    <h2>News</h2>
-    <p>{{first_news_ibov_title}} <a href="{{first_news_ibov_link}}">Source.</a></p>
-    <p>{{first_news_bb_title}} <a href="{{first_news_bb_link}}">Source.</a></p>
-    <p>{{first_news_vale_title}} <a href="{{first_news_vale_link}}">Source.</a></p>
-    <p>{{first_news_petro_title}} <a href="{{first_news_petro_link}}">Source.</a></p>
+<h1>This is my first Site coded in Python</h1>
+<br>
+<br>
+<h2>News</h2>
+<p>{{ first_news_ibov_title }} <a href="{{ first_news_ibov_link }}">Source.</a></p>
+<p>{{ first_news_bb_title }} <a href="{{ first_news_bb_link }}">Source.</a></p>
+<p>{{ first_news_vale_title }} <a href="{{ first_news_vale_link }}">Source.</a></p>
+<p>{{ first_news_petro_title }} <a href="{{ first_news_petro_link }}">Source.</a></p>
 
-
-
-    <br>
-    <br>
-    <p>Ibovespa</p>
-    <p>{{ ibovespa_price }}</p>
-    <br>
-    <br>
-    <p>Today Highest</p>
-    <p>{{highest_gain_ticker}}</p>
-    <p>+{{highest_gain_formatted}}%</p>
-    <p>Close Price: R${{close_price_formatted}}</p>
-    <br>
-    <br>
-    <p>Today Highest Fii (Brazilian Reits*)</p>
-    <p>{{highest_gain_ticker_fii}}</p>
-    <p>+{{highest_gain_fii_formatted}}%</p>
-    <p>Close Price: R${{close_price_fii_formatted}}</p>
-
+<br>
+<br>
+<p>Ibovespa</p>
+<p>{{ ibovespa_price }}</p>
+<br>
+<br>
+<p>Today Highest</p>
+<p>{{ highest_gain_ticker }}</p>
+<p>+{{ highest_gain_formatted }}%</p>
+<p>Close Price: R${{ highest_gain_close_price }}</p>
+<br>
+<br>
+<p>Today Highest Fii (Brazilian Reits*)</p>
+<p>{{ highest_gain_ticker_fii }}</p>
+<p>+{{ highest_gain_fii_formatted }}%</p>
+<p>Close Price: R${{ highest_gain_close_price_fii }}</p>
 
 </body>
 </html>
