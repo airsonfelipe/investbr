@@ -8,6 +8,8 @@
 
 <h1>This is my first Site coded in Python</h1>
 <br>
+<p><a href="/stocks"> Brazilian Stocks</a> </p>
+<br>
 <br>
 <h2>News</h2>
 <p>{{ first_news_ibov_title }} <a href="{{ first_news_ibov_link }}">Source.</a></p>
@@ -22,15 +24,14 @@
 <br>
 <br>
 <p>Today Highest</p>
-<p>{{ highest_gain_ticker }}</p>
-<p>+{{ highest_gain_formatted }}%</p>
-<p>Close Price: R${{ highest_gain_close_price }}</p>
-<br>
-<br>
-<p>Today Highest Fii (Brazilian Reits*)</p>
-<p>{{ highest_gain_ticker_fii }}</p>
-<p>+{{ highest_gain_fii_formatted }}%</p>
-<p>Close Price: R${{ highest_gain_close_price_fii }}</p>
+<p>Ticker: {{ highest_gain['ticker'] }}</p>
+<p>Variation: {{ highest_gain['variation'] }}%</p>
+<p>Close Price: R${{ highest_gain['close_price'] }}</p>
+
+<p>Today Lowest Drop</p>
+<p>Ticker: {{ lowest_drop['ticker'] }}</p>
+<p>Variation: {{ lowest_drop['variation'] }}%</p>
+<p>Close Price: R${{ lowest_drop['close_price'] }}</p>
 
 </body>
 </html>

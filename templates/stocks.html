@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Data</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stock Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Ticker</th>
+                <th>Open</th>
+                <th>Close</th>
+                <th>Variation (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks_data %}
+            <tr>
+                <td>{{ stock.ticker }}</td>
+                <td>{{ stock.open_price|round(2) }}</td>
+                <td>{{ stock.close_price|round(2) }}</td>
+                <td>{{ stock.variation|round(2) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

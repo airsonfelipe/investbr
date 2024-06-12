@@ -23,9 +23,11 @@ print('Total do IPCA no ano de 2024, até agora, é de: ', total_ipca)
 
 inflacao_anual = total_ipca / 100
 
-renda_desejada_anual = 240000  # por ano
+renda_desejada_anual = 240000 + (inflacao_anual * 240000)  # por ano
 renda_desejada_acoes = renda_desejada_anual / 2
 renda_desejada_fiis = renda_desejada_anual / 2
+print('Renda desejada anual, corrigida pela inflacao: ', renda_desejada_anual)
+print(' ')
 
 tickers_proporcao = {
     'BBAS3.SA': 0.06,
@@ -110,6 +112,7 @@ def calcular_papeis(tickers, renda_desejada):
         print(f'Renda por empresa: R${renda_por_empresa:.2f}')
         print(f'Dividendo por ação: R${dividendo_por_acao:.2f}')
         print(f'Quantidade de papéis necessários: {quantidade_papel:.2f}\n')
+        print(f'{quantidade_papel:.2f}\n')
 
 
 # Calcular papéis necessários para ações
