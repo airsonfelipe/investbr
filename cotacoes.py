@@ -56,49 +56,10 @@ preco_abertura_list = preco_abertura.tolist()
 preco_fechamento_list = preco_fechamento.tolist()
 variacao_percentual_list = variacao_percentual.tolist()
 
+def get_ibovespa_price():
+    ibovespa_ticker = '^BVSP'
+    ibovespa_data = yfinance.download(ibovespa_ticker, period="1d")
+    ibovespa_price = '{:,.0f}'.format(ibovespa_data["Close"].iloc[-1])
+    return ibovespa_price
 
-
-
-
-"""
-import pandas as pd
-import pandas_datareader.data as pdr
-import yfinance as yf
-
-
-def get_open_and_close_price(ticker_symbol):
-    # Obtém o objeto Ticker da ação
-    ticker = yf.Ticker(ticker_symbol)
-
-    # Tenta obter o histórico de preços para o último dia
-    stock_info = ticker.history(period='1d')
-
-    # Se não houver dados disponíveis, retorna None
-    if stock_info.empty:
-        return None, None, None
-
-    # Pega o preço de abertura e fechamento disponíveis para o último dia
-    open_price = stock_info['Open'].iloc[-1]
-    close_price = stock_info['Close'].iloc[-1]
-    date = stock_info.index[-1]
-
-    if open_price is not None and close_price is not None:
-        # Calcula a diferença percentual entre o preço de fechamento e abertura
-        difference = ((close_price - open_price) / open_price) * 100
-        print(f'A cotação de abertura da ação {ticker_symbol} no dia {date.date()} foi: R${open_price:.2f}')
-        print(f'A cotação de fechamento da ação {ticker_symbol} no dia {date.date()} foi: R${close_price:.2f}')
-        print(f'A empresa {ticker_symbol} valorizou {difference:.2f}% no dia {date.date()}.')
-    elif open_price is None:
-        print(f'O preço de abertura da ação {ticker_symbol} não está disponível.')
-    elif close_price is None:
-        print(f'O preço de fechamento da ação {ticker_symbol} não está disponível.')
-
-    # Exibe o link para obter mais informações sobre a ação
-    print(f'Mais informações sobre a ação {ticker_symbol}: '
-          f'https://www.google.com/search?q={ticker_symbol.replace(".", "%2E")}+cota%C3%A7%C3%A3o')
-
-
-# Exemplo de uso
-ticker_symbol = 'AGRO3.SA'
-get_open_and_close_price(ticker_symbol)
-"""
+get_ibovespa_price()

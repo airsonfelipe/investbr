@@ -23,15 +23,16 @@
 <p>{{ ibovespa_price }}</p>
 <br>
 <br>
-<p>Today Highest</p>
-<p>Ticker: {{ highest_gain['ticker'] }}</p>
-<p>Variation: {{ highest_gain['variation'] }}%</p>
-<p>Close Price: R${{ highest_gain['close_price'] }}</p>
-
+<p>Today Highest Stock</p>
+<p>Ticker: {{ highest_gain.ticker if highest_gain else 'N/A' }}</p>
+<p>Variation: {{ highest_gain.variation|round(2) if highest_gain else 'N/A' }}%</p>
+<p>Close Price: R${{ highest_gain.close_price|round(2) if highest_gain else 'N/A' }}</p>
+<br>
 <p>Today Lowest Drop</p>
-<p>Ticker: {{ lowest_drop['ticker'] }}</p>
-<p>Variation: {{ lowest_drop['variation'] }}%</p>
-<p>Close Price: R${{ lowest_drop['close_price'] }}</p>
-
+<p>Ticker: {{ lowest_drop.ticker if lowest_drop else 'N/A' }}</p>
+<p>Variation: {{ lowest_drop.variation|round(2) if lowest_drop else 'N/A' }}%</p>
+<p>Close Price: R${{ lowest_drop.close_price|round(2) if lowest_drop else 'N/A' }}</p>
+<br>
+<br>
 </body>
 </html>

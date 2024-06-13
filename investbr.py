@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from news import noticias_ibov, noticias_acoes_bb, noticias_acoes_vale, noticias_acoes_petrobras
-from cotacoes import preco_abertura_list, preco_fechamento_list, variacao_percentual_list, ativos
-
+from cotacoes import preco_abertura_list, preco_fechamento_list, variacao_percentual_list, ativos, get_ibovespa_price
 
 app = Flask(__name__)
 
@@ -12,10 +11,25 @@ def homepage():
     first_news_bb_title, first_news_bb_link = noticias_acoes_bb()
     first_news_vale_title, first_news_vale_link = noticias_acoes_vale()
     first_news_petro_title, first_news_petro_link = noticias_acoes_petrobras()
+    ibovespa_price = get_ibovespa_price()
 
     # Calculando a maior alta e a maior baixa
-    highest_gain = max(variacao_percentual_list)
-    lowest_drop = min(variacao_percentual_list)
+    highest_gain = {}
+    lowest_drop = {}
+    if variacao_percentual_list:
+        max_variation_index = variacao_percentual_list.index(max(variacao_percentual_list))
+        min_variation_index = variacao_percentual_list.index(min(variacao_percentual_list))
+
+        highest_gain = {
+            'ticker': ativos[max_variation_index],
+            'variation': variacao_percentual_list[max_variation_index],
+            'close_price': preco_fechamento_list[max_variation_index]
+        }
+        lowest_drop = {
+            'ticker': ativos[min_variation_index],
+            'variation': variacao_percentual_list[min_variation_index],
+            'close_price': preco_fechamento_list[min_variation_index]
+        }
 
     return render_template('homepage.html',
         first_news_ibov_title=first_news_ibov_title,
@@ -33,6 +47,8 @@ def homepage():
 
         highest_gain=highest_gain,
         lowest_drop=lowest_drop,
+
+        ibovespa_price=ibovespa_price
     )
 
 @app.route('/stocks')
