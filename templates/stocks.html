@@ -19,6 +19,11 @@
         th {
             background-color: #f2f2f2;
         }
+        img {
+            width: auto; /* Ajusta a largura da imagem para caber no container */
+            height: auto; /* Mantém a proporção da imagem */
+            max-width: 100%; /* Garante que a imagem não ultrapasse a largura do container */
+        }
     </style>
 </head>
 <body>
@@ -43,5 +48,7 @@
             {% endfor %}
         </tbody>
     </table>
+    <h2>Gráfico dos últimos 30 dias</h2>
+    <img src="data:image/png;base64,{{ grafico_base64 }}" alt="Gráfico de preços ajustados">
 </body>
 </html>

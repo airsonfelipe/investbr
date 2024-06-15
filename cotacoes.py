@@ -8,53 +8,53 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
 def obter_datas():
-    # Obter a data atual
     data_atual = datetime.now().date()
-
-    # Calcular a data de 30 dias atrás
     data_30_dias_atras = data_atual - timedelta(days=30)
+    return data_atual.strftime('%Y-%m-%d'), data_30_dias_atras.strftime('%Y-%m-%d')
 
-    # Formatar as datas no formato 'YYYY-MM-DD'
-    data_atual_formatada = data_atual.strftime('%Y-%m-%d')
-    data_30_dias_atras_formatada = data_30_dias_atras.strftime('%Y-%m-%d')
+def cotacoes_stocks():
+    with open('tickers.txt', 'r') as file:
+        ativos = file.read().splitlines()
 
-    # Retornar as datas formatadas
-    return data_atual_formatada, data_30_dias_atras_formatada
+    data_atual, data_30_dias_atras = obter_datas()
 
-# Leitura dos ativos de um arquivo de texto
-with open('tickers.txt', 'r') as file:
-    ativos = file.read().splitlines()
+    yfinance.pdr_override()
+    data_inicial = data_30_dias_atras
+    data_final = data_atual
 
-# Exemplo de uso da função
-data_atual, data_30_dias_atras = obter_datas()
-print("Data de hoje:", data_atual)
-print("Data de 30 dias atrás:", data_30_dias_atras)
+    tabela_cotacoes = pdr.get_data_yahoo(ativos, data_inicial, data_final)[['Open', 'Adj Close']]
+    preco_abertura = tabela_cotacoes.iloc[-1]['Open']
+    preco_fechamento = tabela_cotacoes.iloc[-1]['Adj Close']
+    variacao_percentual = ((preco_fechamento - preco_abertura) / preco_abertura) * 100
 
-# Configuração do Yahoo Finance
-yfinance.pdr_override()
+    preco_abertura_list = preco_abertura.tolist()
+    preco_fechamento_list = preco_fechamento.tolist()
+    variacao_percentual_list = variacao_percentual.tolist()
 
-# Definição das datas inicial e final
-data_inicial = data_30_dias_atras
-data_final = data_atual
+    return preco_abertura_list, preco_fechamento_list, variacao_percentual_list, ativos, tabela_cotacoes
 
-# Obtendo os dados do Yahoo Finance para cada ativo na lista
-tabela_cotacoes = pdr.get_data_yahoo(ativos, data_inicial, data_final)[['Open', 'Adj Close']]
-# print(tabela_cotacoes)
 
-# Obtendo o preço de abertura e de fechamento do último dia
-preco_abertura = tabela_cotacoes.iloc[-1]['Open']
-preco_fechamento = tabela_cotacoes.iloc[-1]['Adj Close']
-print('Preço de abertura:', preco_abertura)
-print('Preço de fechamento:', preco_fechamento)
+def cotacoes_fii():
+    with open('tickers_fii.txt', 'r') as file:
+        ativos_fii = file.read().splitlines()
 
-# Calculando a variação percentual
-variacao_percentual = ((preco_fechamento - preco_abertura) / preco_abertura) * 100
-print('Variação percentual:', variacao_percentual)
+    data_atual, data_30_dias_atras = obter_datas()
 
-# Convertendo os dados para listas para exibição
-preco_abertura_list = preco_abertura.tolist()
-preco_fechamento_list = preco_fechamento.tolist()
-variacao_percentual_list = variacao_percentual.tolist()
+    yfinance.pdr_override()
+    data_inicial = data_30_dias_atras
+    data_final = data_atual
+
+    tabela_cotacoes_fii = pdr.get_data_yahoo(ativos_fii, data_inicial, data_final)[['Open', 'Adj Close']]
+    preco_abertura_fii = tabela_cotacoes_fii.iloc[-1]['Open']
+    preco_fechamento_fii = tabela_cotacoes_fii.iloc[-1]['Adj Close']
+    variacao_percentual_fii = ((preco_fechamento_fii - preco_abertura_fii) / preco_abertura_fii) * 100
+
+    preco_abertura_list_fii = preco_abertura_fii.tolist()
+    preco_fechamento_list_fii = preco_fechamento_fii.tolist()
+    variacao_percentual_list_fii = variacao_percentual_fii.tolist()
+
+    return preco_abertura_list_fii, preco_fechamento_list_fii, variacao_percentual_list_fii, ativos_fii, tabela_cotacoes_fii
+
 
 def get_ibovespa_price():
     ibovespa_ticker = '^BVSP'

@@ -1,19 +1,21 @@
 from flask import Flask, render_template
 from news import noticias_ibov, noticias_acoes_bb, noticias_acoes_vale, noticias_acoes_petrobras
-from cotacoes import preco_abertura_list, preco_fechamento_list, variacao_percentual_list, ativos, get_ibovespa_price
+from cotacoes import cotacoes_stocks, cotacoes_fii, get_ibovespa_price
+from graficos import grafico_base64
 
 app = Flask(__name__)
 
 @app.route('/')
 def homepage():
-    # Obtendo as notícias
     first_news_ibov_title, first_news_ibov_link = noticias_ibov()
     first_news_bb_title, first_news_bb_link = noticias_acoes_bb()
     first_news_vale_title, first_news_vale_link = noticias_acoes_vale()
     first_news_petro_title, first_news_petro_link = noticias_acoes_petrobras()
     ibovespa_price = get_ibovespa_price()
 
-    # Calculando a maior alta e a maior baixa
+    preco_abertura_list, preco_fechamento_list, variacao_percentual_list, ativos, tabela_cotacoes = cotacoes_stocks()
+    preco_abertura_list_fii, preco_fechamento_list_fii, variacao_percentual_list_fii, ativos_fii, tabela_cotacoes_fii = cotacoes_fii()
+
     highest_gain = {}
     lowest_drop = {}
     if variacao_percentual_list:
@@ -29,6 +31,23 @@ def homepage():
             'ticker': ativos[min_variation_index],
             'variation': variacao_percentual_list[min_variation_index],
             'close_price': preco_fechamento_list[min_variation_index]
+        }
+
+    highest_gain_fii = {}
+    lowest_drop_fii = {}
+    if variacao_percentual_list_fii:
+        max_variation_index_fii = variacao_percentual_list_fii.index(max(variacao_percentual_list_fii))
+        min_variation_index_fii = variacao_percentual_list_fii.index(min(variacao_percentual_list_fii))
+
+        highest_gain_fii = {
+            'ticker': ativos_fii[max_variation_index_fii],
+            'variation': variacao_percentual_list_fii[max_variation_index_fii],
+            'close_price': preco_fechamento_list_fii[max_variation_index_fii]
+        }
+        lowest_drop_fii = {
+            'ticker': ativos_fii[min_variation_index_fii],
+            'variation': variacao_percentual_list_fii[min_variation_index_fii],
+            'close_price': preco_fechamento_list_fii[min_variation_index_fii]
         }
 
     return render_template('homepage.html',
@@ -48,15 +67,22 @@ def homepage():
         highest_gain=highest_gain,
         lowest_drop=lowest_drop,
 
+        preco_abertura_fii=preco_abertura_list_fii,
+        preco_fechamento_fii=preco_fechamento_list_fii,
+        variacao_percentual_fii=variacao_percentual_list_fii,
+
+        highest_gain_fii=highest_gain_fii,
+        lowest_drop_fii=lowest_drop_fii,
+
         ibovespa_price=ibovespa_price
     )
 
 @app.route('/stocks')
 def stocks():
-    # Juntando os dados em uma lista de dicionários
+    preco_abertura_list, preco_fechamento_list, variacao_percentual_list, ativos, tabela_cotacoes = cotacoes_stocks()
+
     stocks_data = []
-    for ticker, open_price, close_price, variation in zip(ativos, preco_abertura_list, preco_fechamento_list,
-                                                          variacao_percentual_list):
+    for ticker, open_price, close_price, variation in zip(ativos, preco_abertura_list, preco_fechamento_list, variacao_percentual_list):
         stocks_data.append({
             'ticker': ticker,
             'open_price': open_price,
@@ -64,10 +90,9 @@ def stocks():
             'variation': variation
         })
 
-    # Ordena a lista de ações pela variação percentual (do maior para o menor)
     stocks_data_sorted = sorted(stocks_data, key=lambda x: x['variation'], reverse=True)
 
-    return render_template('stocks.html', stocks_data=stocks_data_sorted)
+    return render_template('stocks.html', stocks_data=stocks_data_sorted, grafico_base64=grafico_base64)
 
 @app.route('/contacts')
 def contacts():
