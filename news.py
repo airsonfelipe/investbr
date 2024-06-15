@@ -51,3 +51,5 @@ def noticias_acoes_petrobras():
         first_news_petro_link = news[0]['link']
         return first_news_petro_title, first_news_petro_link
     return "No news available.", "#"
+
+#
