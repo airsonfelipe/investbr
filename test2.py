@@ -102,3 +102,54 @@ def dolar_price():
 dolar_price()
 
 
+"""
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>This is my first Site coded in Python</h1>
+    <br>
+    <p><a href="/stocks"> Brazilian Stocks</a> </p>
+    <br>
+    <br>
+    <h2>News</h2>
+    <p>{{ first_news_ibov_title }} <a href="{{ first_news_ibov_link }}">Source.</a></p>
+    <p>{{ first_news_bb_title }} <a href="{{ first_news_bb_link }}">Source.</a></p>
+    <p>{{ first_news_vale_title }} <a href="{{ first_news_vale_link }}">Source.</a></p>
+    <p>{{ first_news_petro_title }} <a href="{{ first_news_petro_link }}">Source.</a></p>
+    <br>
+    <br>
+    <p><h3>Ibovespa</h3></p>
+    <p>{{ ibovespa_price }}</p>
+    <br>
+    <br>
+    <p><h3>Today Highest Stock</h3>
+    <p><h4>Ticker:</h4>{{ highest_gain.ticker if highest_gain else 'N/A' }}
+    <p><h4>Variation:</h4> {{ highest_gain.variation|round(2) if highest_gain else 'N/A' }}%
+    <p><h4>Close Price:</h4> R${{ highest_gain.close_price|round(2) if highest_gain else 'N/A' }}</p>
+    <br>
+    <p><h3>Today Lowest Drop Stock</h3></p>
+    <p><h4>Ticker:</h4> {{ lowest_drop.ticker if lowest_drop else 'N/A' }}</p>
+    <p><h4>Variation:</h4> {{ lowest_drop.variation|round(2) if lowest_drop else 'N/A' }}%</p>
+    <p><h4>Close Price:</h4> R${{ lowest_drop.close_price|round(2) if lowest_drop else 'N/A' }}</p>
+    <br>
+    <p><h3>Today Highest FIIs(Brazilian REITs)</h3>
+    <p><h4>Ticker:</h4>{{ highest_gain_fii.ticker if highest_gain_fii else 'N/A' }}
+    <p><h4>Variation:</h4> {{ highest_gain_fii.variation|round(2) if highest_gain_fii else 'N/A' }}%
+    <p><h4>Close Price:</h4> R${{ highest_gain_fii.close_price|round(2) if highest_gain_fii else 'N/A' }}</p>
+    <br>
+    <p><h3>Today Lowest Drop FIIs(Brazilian REITs)</h3></p>
+    <p><h4>Ticker:</h4> {{ lowest_drop_fii.ticker if lowest_drop_fii else 'N/A' }}</p>
+    <p><h4>Variation:</h4> {{ lowest_drop_fii.variation|round(2) if lowest_drop_fii else 'N/A' }}%</p>
+    <p><h4>Close Price:</h4> R${{ lowest_drop_fii.close_price|round(2) if lowest_drop_fii else 'N/A' }}</p>
+    <br>
+    <br>
+</body>
+</html>
+
+
+"""

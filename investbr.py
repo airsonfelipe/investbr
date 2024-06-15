@@ -7,10 +7,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage():
-    first_news_ibov_title, first_news_ibov_link = noticias_ibov()
-    first_news_bb_title, first_news_bb_link = noticias_acoes_bb()
-    first_news_vale_title, first_news_vale_link = noticias_acoes_vale()
-    first_news_petro_title, first_news_petro_link = noticias_acoes_petrobras()
+    first_news_ibov_title, first_news_ibov_link, first_news_ibov_image = noticias_ibov()
+    first_news_bb_title, first_news_bb_link, first_news_bb_image = noticias_acoes_bb()
+    first_news_vale_title, first_news_vale_link, first_news_vale_image = noticias_acoes_vale()
+    first_news_petro_title, first_news_petro_link, first_news_petro_image = noticias_acoes_petrobras()
+
     ibovespa_price = get_ibovespa_price()
 
     preco_abertura_list, preco_fechamento_list, variacao_percentual_list, ativos, tabela_cotacoes = cotacoes_stocks()
@@ -53,12 +54,16 @@ def homepage():
     return render_template('homepage.html',
         first_news_ibov_title=first_news_ibov_title,
         first_news_ibov_link=first_news_ibov_link,
+        first_news_ibov_image=first_news_ibov_image,
         first_news_bb_title=first_news_bb_title,
         first_news_bb_link=first_news_bb_link,
+        first_news_bb_image=first_news_bb_image,
         first_news_vale_title=first_news_vale_title,
         first_news_vale_link=first_news_vale_link,
+        first_news_vale_image=first_news_vale_image,
         first_news_petro_title=first_news_petro_title,
         first_news_petro_link=first_news_petro_link,
+        first_news_petro_image=first_news_petro_image,
 
         preco_abertura=preco_abertura_list,
         preco_fechamento=preco_fechamento_list,
