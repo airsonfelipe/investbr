@@ -1,4 +1,12 @@
 import yfinance as yf
+from PIL import Image
+
+# Imagens
+
+image_bb = "/static/images/bb.jpg"
+image_petro = "/static/images/petro.jpg"
+image_ibov = "/static/images/ibov.png"
+image_vale = "/static/images/vale.jpg"
 
 # Função genérica para buscar notícias
 def get_news(ticker):
@@ -8,8 +16,7 @@ def get_news(ticker):
     if news:
         first_news_title = news[0]['title']
         first_news_link = news[0]['link']
-        first_news_image = news[0].get('image', '')  # Adiciona o campo de imagem, se existir
-        return first_news_title, first_news_link, first_news_image
+        return first_news_title, first_news_link
     return "No news available.", "#", ""
 
 # NOTICIAS IBOV

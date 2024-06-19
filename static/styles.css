@@ -1,0 +1,41 @@
+/* Classe personalizada para ajustar o tamanho do carrossel */
+.carousel-custom-size {
+    width: 50%; /* Ajuste o valor conforme necessário */
+    max-width: 800px; /* Limite máximo de largura */
+    margin: 0 auto; /* Centraliza o carrossel */
+    margin-left: 20px;
+}
+
+/* Ajuste da margem direita apenas para o bloco Ibovespa */
+.ibovespa-price {
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+/* Ajuste da margem esquerda apenas para o bloco Today Highest Stock */
+.highest-stock {
+    margin-left: 0px;
+    margin-top: 20px;
+
+}
+
+/* Ajuste da margem apenas para o bloco lowest-stock*/
+.lowest-stock {
+    margin-left: 0px;
+    margin-top: 20px;
+
+}
+
+/* Ajuste da margem apenas para o bloco highest-fii*/
+.highest-fii {
+    margin-left: 0px;
+    margin-top: 20px;
+
+}
+
+/* Ajuste da margem apenas para o bloco lowest-fii*/
+.lowest-fii {
+    margin-left: 0px;
+    margin-top: 20px;
+
+}
