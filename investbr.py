@@ -1,8 +1,9 @@
 from flask import Flask, render_template
 from news import (noticias_ibov, noticias_acoes_bb, noticias_acoes_vale, noticias_acoes_petrobras, image_bb, image_petro,
-                  image_ibov, image_vale)
+                  image_ibov, image_vale, img_adv01, img_logo_home)
 from cotacoes import cotacoes_stocks, cotacoes_fii, get_ibovespa_price
 from graficos import grafico_base64
+
 
 app = Flask(__name__)
 
@@ -52,6 +53,7 @@ def homepage():
             'close_price': preco_fechamento_list_fii[min_variation_index_fii]
         }
 
+
     return render_template('homepage.html',
         first_news_ibov_title=first_news_ibov_title,
         first_news_ibov_link=first_news_ibov_link,
@@ -80,8 +82,10 @@ def homepage():
         highest_gain_fii=highest_gain_fii,
         lowest_drop_fii=lowest_drop_fii,
 
-        ibovespa_price=ibovespa_price
-    )
+        ibovespa_price=ibovespa_price,
+
+        img_adv01=img_adv01,
+        img_logo_home=img_logo_home)
 
 @app.route('/stocks')
 def stocks():

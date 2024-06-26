@@ -1,10 +1,52 @@
+
+.logo_home-custom-size {
+    width: 100px;
+    height: 100px;
+    object-fit: fill;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
 /* Classe personalizada para ajustar o tamanho do carrossel */
 .carousel-custom-size {
     width: 50%; /* Ajuste o valor conforme necessário */
-    max-width: 800px; /* Limite máximo de largura */
-    margin: 0 auto; /* Centraliza o carrossel */
-    margin-left: 20px;
+    display: block; /* Necessário para o margin funcionar */
+    margin-left: auto; /* aqui */
+    margin-right: auto; /* e aqui */
+
+    /* max-width: 800px; /* Limite máximo de largura */
+    /* margin: 0 auto; /* Centraliza o carrossel */
+    /* margin-left: 20px; */
+
 }
+
+/* tamanho imagens dentro do carousel */
+.img-custom-size {
+    width: 640px;
+    height: 480px;
+    object-fit: fill;
+}
+
+/* propaganda 01 centro da pagina */
+.adv_01-custom-size {
+    width: 1400px;
+    height: 120px;
+    object-fit: fill;
+
+}
+
+
+/* Estilos para os textos dentro do carrossel */
+.carousel-caption h5 {
+    font-size: 24px; /* Ajuste o tamanho da fonte conforme necessário */
+    font-family: Arial, sans-serif; /* Ajuste o tipo de fonte conforme necessário */
+    background-color: rgba(0, 0, 0, 0.8); /* Ajuste a cor de fundo conforme necessário */
+    color: white; /* Ajuste a cor da fonte conforme necessário */
+    padding: 10px; /* Espaçamento interno para o fundo */
+    border-radius: 5px; /* Bordas arredondadas */
+    text-align: center; /* Centralizar o texto */
+}
+
 
 /* Ajuste da margem direita apenas para o bloco Ibovespa */
 .ibovespa-price {

@@ -7,6 +7,9 @@ image_bb = "/static/images/bb.jpg"
 image_petro = "/static/images/petro.jpg"
 image_ibov = "/static/images/ibov.png"
 image_vale = "/static/images/vale.jpg"
+img_adv01 = "/static/images/advertisement_here_01.png"
+img_logo_home = "/static/images/logo_home.png"
+
 
 # Função genérica para buscar notícias
 def get_news(ticker):
