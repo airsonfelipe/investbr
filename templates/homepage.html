@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-sm bg-body-tertiary navbar-left">
+<nav class="navbar navbar-expand-sm bg-body-tertiary navbar-left">
         <div class="container-fluid">
             <a class="navbar-brand" href="/" ><img src="{{img_logo_home}}" class="logo_home-custom-size"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,11 +44,11 @@
         </div>
     </nav>
 
-    <br>
-    <p><a href="/stocks">Brazilian Stocks</a> | <a href="/contacts">Contacts</a></p>
-    <br>
-    <br>
-    <div align="center"><h2>News</h2></div>
+<br>
+<p><a href="/stocks">Brazilian Stocks</a> | <a href="/contacts">Contacts</a></p>
+<br>
+<br>
+<div align="center"><h2>News</h2></div>
     <div id="newsCarousel" class="carousel slide carousel-custom-size" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -94,7 +94,7 @@
         </button>
     </div>
 
-    <div class="row">
+<div class="row">
         <div class="col-sm-2">
             <div class="ibovespa-price">
                 <h3>Ibovespa</h3>
@@ -147,9 +147,26 @@
         </div>
     </div>
 
-    <div class="adv_01" align="center">
-        <img src="{{img_adv01}}" class="adv_01-custom-size">
+<!--propaganda-->
+<div class="adv_01" align="center">
+    <img src="{{img_adv01}}" class="adv_01-custom-size">
+</div>
+<!--propaganda-->
+
+<h2>+News</h2>
+<div class="container text-center">
+    <div class="row">
+            {% for titulo, link, imagem in noticias %}
+    <div class="col-md-6">
+        <div class="noticia-item">
+
+            <a href="{{ link }}"><img src="{{ imagem }}" width="300" height="300" alt="{{ titulo }}" class="img-fluid"></a>
+            <h2><a href="{{ link }}">{{ titulo }}</a></h2>
+        </div>
     </div>
+            {% endfor %}
+    </div>
+</div>
 
 </body>
 </html>

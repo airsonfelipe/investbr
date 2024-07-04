@@ -1,14 +1,6 @@
 import yfinance as yf
-from PIL import Image
-
-# Imagens
-
-image_bb = "/static/images/bb.jpg"
-image_petro = "/static/images/petro.jpg"
-image_ibov = "/static/images/ibov.png"
-image_vale = "/static/images/vale.jpg"
-img_adv01 = "/static/images/advertisement_here_01.png"
-img_logo_home = "/static/images/logo_home.png"
+import requests
+import bs4
 
 
 # Função genérica para buscar notícias
@@ -20,7 +12,7 @@ def get_news(ticker):
         first_news_title = news[0]['title']
         first_news_link = news[0]['link']
         return first_news_title, first_news_link
-    return "No news available.", "#", ""
+    return "No news available.", "#"
 
 # NOTICIAS IBOV
 def noticias_ibov():
@@ -41,3 +33,41 @@ def noticias_acoes_vale():
 def noticias_acoes_petrobras():
     ticker = 'PETR4.SA'
     return get_news(ticker)
+
+# Imagens das noticias acima
+
+image_bb = "/static/images/bb.jpg"
+image_petro = "/static/images/petro.jpg"
+image_ibov = "/static/images/ibov.png"
+image_vale = "/static/images/vale.jpg"
+img_adv01 = "/static/images/advertisement_here_01.png"
+img_logo_home = "/static/images/logo_home.png"
+
+
+
+# NOTICIAS MEIO DA PAGINA
+
+url = 'https://www.infomoney.com.br/mercados/'
+requisicao = requests.get(url)
+pagina = bs4.BeautifulSoup(requisicao.text, "html.parser")
+
+# Pegar os elementos dentro de <a> que tenham a classe "article-card__asset-link"
+lista_noticias = pagina.find_all("a", class_="article-card__asset-link")
+
+# Pegar os elementos dentro de <img> que tenham a classe "aspect-ratio__image"
+imagem_noticia = pagina.find_all("img", class_="aspect-ratio__image")
+def noticias_meio_pagina():
+    noticias = []
+    for noticia, imagem in zip(lista_noticias, imagem_noticia):
+        noticia_titulo = noticia.get("title")
+        noticia_link = noticia.get("href")
+        imagem_url = imagem.get("src")
+        noticias.append((noticia_titulo, noticia_link, imagem_url))
+    return noticias
+# Exemplo de uso
+noticias = noticias_meio_pagina()
+for titulo, link, imagem in noticias:
+    print(titulo)
+    print(link)
+    print(imagem)
+    print("#############")

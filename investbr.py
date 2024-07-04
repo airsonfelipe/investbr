@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from news import (noticias_ibov, noticias_acoes_bb, noticias_acoes_vale, noticias_acoes_petrobras, image_bb, image_petro,
-                  image_ibov, image_vale, img_adv01, img_logo_home)
+                  image_ibov, image_vale, img_adv01, img_logo_home, noticias_meio_pagina)
 from cotacoes import cotacoes_stocks, cotacoes_fii, get_ibovespa_price
 from graficos import grafico_base64
 
@@ -13,6 +13,7 @@ def homepage():
     first_news_bb_title, first_news_bb_link = noticias_acoes_bb()
     first_news_vale_title, first_news_vale_link = noticias_acoes_vale()
     first_news_petro_title, first_news_petro_link = noticias_acoes_petrobras()
+    noticias = noticias_meio_pagina()
 
     ibovespa_price = get_ibovespa_price()
 
@@ -67,6 +68,7 @@ def homepage():
         first_news_vale_link=first_news_vale_link,
         first_news_petro_title=first_news_petro_title,
         first_news_petro_link=first_news_petro_link,
+        noticias=noticias,
 
         preco_abertura=preco_abertura_list,
         preco_fechamento=preco_fechamento_list,
