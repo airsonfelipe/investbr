@@ -53,7 +53,7 @@ headers = {
     'Pragma': 'no-cache',
     'Expires': '0'
 }
-requisicao = requests.get(url)
+requisicao = requests.get(url, headers=headers)
 pagina = bs4.BeautifulSoup(requisicao.text, "html.parser")
 
 # Pegar os elementos dentro de <a> que tenham a classe "article-card__asset-link"
