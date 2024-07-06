@@ -48,6 +48,11 @@ img_logo_home = "/static/images/logo_home.png"
 # NOTICIAS MEIO DA PAGINA
 
 url = 'https://www.infomoney.com.br/mercados/'
+headers = {
+    'Cache-Control': 'no-cache, no-store, must-revalidate',
+    'Pragma': 'no-cache',
+    'Expires': '0'
+}
 requisicao = requests.get(url)
 pagina = bs4.BeautifulSoup(requisicao.text, "html.parser")
 
